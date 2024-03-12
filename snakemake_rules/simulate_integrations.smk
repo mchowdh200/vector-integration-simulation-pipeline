@@ -75,10 +75,10 @@ rule simulate_integrations:
 		"../envs/simvi.yml"
 	container:
 		"docker://szsctt/simvi:2"
-	resources:
-		mem_mb= lambda wildcards, attempt, input: bandpass(get_mem(input, attempt, 10) + int(get_parameter(wildcards, 'int_num'))*10 + int(get_parameter(wildcards, 'epi_num'))*10, 100, 50000),
-		time = lambda wildcards, attempt: ('30:00', '2:00:00', '24:00:00', '7-00:00:00')[attempt - 1],
-		nodes = 1
+	# resources:
+	# 	mem_mb= lambda wildcards, attempt, input: bandpass(get_mem(input, attempt, 10) + int(get_parameter(wildcards, 'int_num'))*10 + int(get_parameter(wildcards, 'epi_num'))*10, 100, 50000),
+	# 	time = lambda wildcards, attempt: ('30:00', '2:00:00', '24:00:00', '7-00:00:00')[attempt - 1],
+	# 	nodes = 1
 	params:
 		int_num = lambda wildcards: format_parameter(wildcards, '--int_num', 'int_num'),
 		epi_num = lambda wildcards: format_parameter(wildcards, '--epi_num', 'epi_num'),
